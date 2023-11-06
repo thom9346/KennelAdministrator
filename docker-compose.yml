@@ -14,6 +14,7 @@ services:
     build:
       context: ./KennelIndexerAPIV2
       dockerfile: KennelIndexer.API/Dockerfile
+    image: thohol02/kennelapp-backendapi:$BUILD_NUMBER
     restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -28,6 +29,7 @@ services:
     build:
       context: ./KennelIndexer/kennelApp
       dockerfile: Dockerfile
+    image: thohol02/kennelapp-frontend:$BUILD_NUMBER
     ports:
       - 4200:4200
     depends_on:
