@@ -20,6 +20,9 @@ pipeline {
         }
         stage("Deploy to Docker Swarm") {
             steps {
+                // Ensure the network exists
+                bat 'docker network ls | findstr my-network || docker network create my-network'
+
                // Update the kennel-db service
                 bat 'docker service update --network-add my-network --image mcr.microsoft.com/mssql/server:2019-latest kennel-db || docker service create --name kennel-db --network my-network --env SA_PASSWORD=8zWt4!LmR6@kC3#eQb0 --env ACCEPT_EULA=Y --publish 1433:1433 mcr.microsoft.com/mssql/server:2019-latest'
 
