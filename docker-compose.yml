@@ -8,7 +8,9 @@ services:
       SA_PASSWORD: '8zWt4!LmR6@kC3#eQb0'
       ACCEPT_EULA: 'Y'
     ports:
-      - "1433:1433"
+       - target: 1433
+         published: 1433
+         mode: host
     networks:
       - my-network
 
@@ -23,7 +25,9 @@ services:
       - ASPNETCORE_URLS=http://+:80
       - ConnectionStrings__MainDB=Server=kennel-db;Database=KennelDB;User Id=sa;Password=8zWt4!LmR6@kC3#eQb0;TrustServerCertificate=true;Connection Timeout=30
     ports:
-      - 5000:80
+      - target: 80
+        published: 5000
+        mode: host
     depends_on:
       - kennel-db
     networks:
@@ -35,11 +39,14 @@ services:
       dockerfile: Dockerfile
     image: thohol02/kennelapp-frontend:$BUILD_NUMBER
     ports:
-      - 4200:4200
+      - target: 4200
+        published: 4200
+        mode: host
     depends_on:
       - kennelapi
     networks:
       - my-network
-      
+
 networks:
   my-network:
+  external: true
