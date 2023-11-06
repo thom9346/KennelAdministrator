@@ -9,6 +9,8 @@ services:
       ACCEPT_EULA: 'Y'
     ports:
       - "1433:1433"
+    networks:
+      - my-network
 
   kennelapi:
     build:
@@ -24,6 +26,8 @@ services:
       - 5000:80
     depends_on:
       - kennel-db
+    networks:
+      - my-network
 
   angular-app:
     build:
@@ -34,3 +38,8 @@ services:
       - 4200:4200
     depends_on:
       - kennelapi
+    networks:
+      - my-network
+      
+networks:
+  my-network:
