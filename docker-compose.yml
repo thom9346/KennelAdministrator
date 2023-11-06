@@ -1,20 +1,25 @@
 version: "3.9"
 
 services:
+
   kennel-db:
     image: mcr.microsoft.com/mssql/server:2019-latest
     environment:
       SA_PASSWORD: '8zWt4!LmR6@kC3#eQb0'
       ACCEPT_EULA: 'Y'
     ports:
-      - target: 1433
-        published: 1433
-        mode: host
+       - target: 1433
+         published: 1433
+         mode: host
     networks:
       - my-network
 
   kennelapi:
+    build:
+      context: ./KennelIndexerAPIV2
+      dockerfile: KennelIndexer.API/Dockerfile
     image: thohol02/kennelapp-backendapi:$BUILD_NUMBER
+    restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
@@ -23,15 +28,22 @@ services:
       - target: 80
         published: 5000
         mode: host
+    depends_on:
+      - kennel-db
     networks:
       - my-network
 
   angular-app:
+    build:
+      context: ./KennelIndexer/kennelApp
+      dockerfile: Dockerfile
     image: thohol02/kennelapp-frontend:$BUILD_NUMBER
     ports:
       - target: 4200
         published: 4200
         mode: host
+    depends_on:
+      - kennelapi
     networks:
       - my-network
 
