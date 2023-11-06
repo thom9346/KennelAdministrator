@@ -1,0 +1,52 @@
+
+<div class="main-div" *ngIf="person != undefined">
+<div [ngClass]="{'nzcard': images.length < 0, 'nzcard-withpic': images.length > 0}">
+  <nz-card nzHoverable [nzCover]="coverTemplate" >
+    <div class="align-right">
+      <button nz-button nzType="primary" (click)="editPerson()">Edit<i nz-icon nzType="edit" nzTheme="outline"></i></button>
+    </div>
+    <nz-card-meta nzTitle="{{person.firstName}} {{person.lastName}}" nzDescription="Adress: {{person.address}}"></nz-card-meta>
+    <p>{{person.reasonsForBeingOnTheList}}</p>
+
+  <div class="editableDiv" *ngIf="editMode">
+      <form  enctype="multipart/form-data" method="POST" novalidate [formGroup]="updateForm" 
+      (submit)="onSubmit(updateForm)">
+
+      <div class="">
+          <label> Edit first name</label>
+          <input nz-input type="text" class="form-control" formControlName="firstName">
+      </div>
+      
+      <div class="">
+        <label> Edit last name</label>
+        <input nz-input type="text" class="form-control" formControlName="lastName">
+      </div>
+
+      <div class="">
+        <label> Edit address</label>
+        <input nz-input type="text" class="form-control" formControlName="address">
+      </div>
+      
+      <div class="">
+        <label> Edit reasons for being on the list</label>
+        <input nz-input type="text" class="form-control" formControlName="reasonsForBeingOnTheList">
+      </div>
+
+      <div class="text-center mt-2">
+        <button nz-button nzType="primary" type="submit">Update<i class="fa fa-sign-in ml-1"></i></button>
+      </div>
+      </form>
+  </div>
+
+  </nz-card>
+</div>
+  <ng-template #coverTemplate>
+  <nz-carousel [nzEffect]="effect">
+      <div nz-carousel-content *ngFor="let image of images">
+        <div>
+          <img alt="relatedPics" src='http://localhost:5000/{{image}}' height="600px" width="100%"/> 
+        </div>
+      </div>
+      </nz-carousel>
+  </ng-template>
+</div>

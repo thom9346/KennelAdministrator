@@ -1,0 +1,52 @@
+<!--Search field-->
+<button nz-button [nzSize]="size" nzType="primary" (click)="showModal()">Add to list</button>
+<br />
+<br />
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Add People To Blacklist" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzWidth="600" [nzOkDisabled]="isSpinning" [nzCancelDisabled]="isSpinning">
+<nz-spin [nzSpinning]="isSpinning">
+  <app-add-people></app-add-people>
+</nz-spin>
+</nz-modal>
+
+
+<nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+  <input type="text"
+      nz-input
+      name="searchString"
+      placeholder="Search for name"
+      [(ngModel)]="searchString" />
+</nz-input-group>
+<ng-template #suffixIconButton>
+  <button nz-button nzType="primary" nzSearch>
+    <i nz-icon nzType="search"></i>
+  </button>
+</ng-template>
+<br />
+<br />
+
+<!--Table-->
+<nz-table #basicTable [nzData]="listOfData">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Adress</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data | filter : 'firstName' : searchString; let i = index">
+        <td>{{i}}</td>
+        <td>{{data.firstName}}</td> <!--This is actually fullname...-->
+        <td>{{data.address}}</td>
+        <td>
+          <a [routerLink]="['/names', data.personId]">View</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a>Edit</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a nz-popconfirm nzTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data.personId)">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>

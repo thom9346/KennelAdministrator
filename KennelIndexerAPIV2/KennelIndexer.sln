@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KennelIndexer.API", "KennelIndexer.API\KennelIndexer.API.csproj", "{8A5CA393-8A87-45AC-926F-9C3CB8C54032}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KennelIndexer.Tests", "KennelIndexer.Tests\KennelIndexer.Tests.csproj", "{2393EC4B-02AB-4E45-B9D3-F31EBD085605}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A5CA393-8A87-45AC-926F-9C3CB8C54032}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A5CA393-8A87-45AC-926F-9C3CB8C54032}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A5CA393-8A87-45AC-926F-9C3CB8C54032}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A5CA393-8A87-45AC-926F-9C3CB8C54032}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2393EC4B-02AB-4E45-B9D3-F31EBD085605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2393EC4B-02AB-4E45-B9D3-F31EBD085605}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2393EC4B-02AB-4E45-B9D3-F31EBD085605}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2393EC4B-02AB-4E45-B9D3-F31EBD085605}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A0DCFD59-C725-4ED1-90D8-715A16FA0688}
+	EndGlobalSection
+EndGlobal

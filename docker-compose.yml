@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+
+  kennel-db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      SA_PASSWORD: '8zWt4!LmR6@kC3#eQb0'
+      ACCEPT_EULA: 'Y'
+    ports:
+      - "1433:1433"
+
+  kennelapi:
+    build:
+      context: ./KennelIndexerAPIV2
+      dockerfile: KennelIndexer.API/Dockerfile
+    restart: on-failure
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__MainDB=Server=kennel-db;Database=KennelDB;User Id=sa;Password=8zWt4!LmR6@kC3#eQb0;TrustServerCertificate=true;Connection Timeout=30
+    ports:
+      - 5000:80
+    depends_on:
+      - kennel-db
+
+  angular-app:
+    build:
+      context: ./KennelIndexer/kennelApp
+      dockerfile: Dockerfile
+    ports:
+      - 4200:4200
+    depends_on:
+      - kennelapi
